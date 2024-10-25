@@ -1,49 +1,48 @@
+// src/components/EventCalendar.js
 import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // Calendar component CSS
-import { fetchHolidays } from './services/calendarificService';
-import { fetchMoonPhase } from './services/moonPhaseService';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css'; // Import the default styles
+
+// Setup the localizer by providing the moment Object to the correct localizer.
+const localizer = momentLocalizer(moment);
 
 const EventCalendar = () => {
-  const [date, setDate] = useState(new Date());
-  const [holidays, setHolidays] = useState([]);
-  const [moonPhase, setMoonPhase] = useState(null);
+    const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const holidaysData = await fetchHolidays('US', date.getFullYear());
-        setHolidays(holidaysData);
-        
-        const moonPhaseData = await fetchMoonPhase(date.toISOString().split('T')[0]);
-        setMoonPhase(moonPhaseData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+    // Fetch events from your API (or directly from your state if already available)
+    useEffect(() => {
+        // You can fetch events from your backend API here
+        // For now, we'll use some static data
+        const fetchedEvents = [
+            {
+                id: 0,
+                title: 'New Year\'s Day',
+                start: new Date(2024, 0, 1), // January 1, 2024
+                end: new Date(2024, 0, 1, 23, 59, 59),
+            },
+            {
+                id: 1,
+                title: 'Doctor Appointment',
+                start: new Date(2024, 0, 10, 15, 0), // January 10, 2024, 3 PM
+                end: new Date(2024, 0, 10, 16, 0), // January 10, 2024, 4 PM
+            },
+            // Add more events as needed
+        ];
+        setEvents(fetchedEvents);
+    }, []);
 
-    fetchData();
-  }, [date]);
-
-  const tileContent = ({ date }) => {
-    const dateString = date.toISOString().split('T')[0];
-    const holidaysOnDate = holidays.filter(holiday => holiday.date.iso === dateString);
-    return holidaysOnDate.length > 0 ? <span className="event-marker">🎉</span> : null;
-  };
-
-  return (
-    <div className="calendar-container">
-      <h2>Event Calendar</h2>
-      <Calendar onChange={setDate} value={date} tileContent={tileContent} />
-
-      <div>
-        <h3>Selected Date: {date.toDateString()}</h3>
-        {moonPhase && (
-          <p>Moon Phase: {moonPhase.phase}</p>
-        )}
-      </div>
-    </div>
-  );
+    return (
+        <div style={{ height: 600 }}>
+            <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: 500, margin: '50px' }}
+            />
+        </div>
+    );
 };
 
 export default EventCalendar;
