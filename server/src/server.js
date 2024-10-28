@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import eventRoutes from './routes/eventRoutes';
-const authRoutes = require('./routes/authRoutes');
+import authRoutes from './routes/authRoutes';
 import router from './routes'; // Adjust path as necessary
 import bodyParser from 'body-parser';
 import { Pool } from 'pg';
@@ -16,17 +16,16 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', eventRoutes);
 app.use('/api/auth', authRoutes);  
-app.use(bodyParser.json());
-app.use('/api', router); // This will prefix all routes with /api
+app.use('/api', router); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const pool = new Pool({
-    user: 'your_user',
+    user: 'postgres',
     host: 'localhost',
     database: 'calendar',
-    password: 'your_password',
+    password: 'postgres',
     port: 5432,
 });
 
