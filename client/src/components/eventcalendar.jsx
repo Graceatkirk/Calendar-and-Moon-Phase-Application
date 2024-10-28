@@ -56,7 +56,6 @@ fetch(apiUrl)
     .catch(error => {
         console.error('Error fetching holidays:', error);
     });
-
 // Adjust the URL as needed
 
 export default EventCalendar;
