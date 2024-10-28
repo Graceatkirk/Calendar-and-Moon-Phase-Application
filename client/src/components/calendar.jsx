@@ -8,7 +8,7 @@ const Calendar = () => {
   useEffect(() => {
     const fetchHolidays = async () => {
       try {
-        const response = await axios.get('http://localhost:5432/api/holidays');
+        const response = await axios.get('https://calendarific.com/api/v2/holidays?api_key=REACT_APP_CALENDARIFIC_API_KEY&country=US&year=2024');
         setHolidays(response.data.response.holidays);
       } catch (error) {
         console.error('Error fetching holidays:', error);
