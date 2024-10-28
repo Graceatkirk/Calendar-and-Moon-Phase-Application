@@ -49,15 +49,16 @@ CREATE TABLE reminders (
 
 -- Optional table to store holidays and moon phases if you want to keep them separate
 CREATE TABLE holidays (
-    holiday_id SERIAL PRIMARY KEY,
-    holiday_name VARCHAR(100) NOT NULL,
-    holiday_date DATE NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    holiday_name VARCHAR(255) NOT NULL,
+    holiday_description TEXT,
+    holiday_date DATE NOT NULL
 );
 
 CREATE TABLE moon_phases (
-    phase_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     phase_name VARCHAR(50) NOT NULL,
-    phase_date DATE NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    illumination DECIMAL,
+    moon_age DECIMAL,
+    phase_date DATE NOT NULL
 );
