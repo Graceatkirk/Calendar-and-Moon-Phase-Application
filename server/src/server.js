@@ -11,17 +11,26 @@ import { Event } from './models/event.js'; // Adjust as necessary
 dotenv.config();
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173', // Allow requests from this origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    credentials: true // Allow credentials if necessary
+};
+
+app.use(cors(corsOptions)); // Apply CORS middleware
+app.options('*', cors(corsOptions)); // Handle preflight requests for all routes
+
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use('/api', eventRoutes);
 app.use('/api/auth', authRoutes);  
 
 const pool = new Pool({
-    user: 'your_user',
+    user: 'postgres',
     host: 'localhost',
     database: 'calendar',
-    password: 'your_password',
+    password: 'howdypartner',
     port: 5432,
 });
 
