@@ -18,10 +18,10 @@ app.use('/api', eventRoutes);
 app.use('/api/auth', authRoutes);  
 
 const pool = new Pool({
-    user: 'your_user',
+    user: 'postgres',
     host: 'localhost',
     database: 'calendar',
-    password: 'your_password',
+    password: 'postgres',
     port: 5432,
 });
 

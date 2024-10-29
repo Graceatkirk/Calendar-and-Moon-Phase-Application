@@ -1,4 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
+const { Model } = require('sequelize');
+const sequelize = require('../config/database'); // Adjust the path as necessary
 
 export default (sequelize) => {
   class User extends Model {
@@ -13,6 +15,23 @@ export default (sequelize) => {
       });
     }
   }
+
+  class User extends Model {}
+
+User.init({
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  sequelize,
+  modelName: 'User',
+});
   
   User.init({
     user_id: {

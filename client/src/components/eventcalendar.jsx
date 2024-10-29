@@ -123,4 +123,17 @@ const EventCalendar = () => {
     );
 };
 
+const apiUrl = 'https://calendarific.com/'; // Replace with your actual API URL
+const outputElement = document.getElementById('output'); // Adjust the ID as needed
+
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        outputElement.innerHTML = JSON.stringify(data, null, 2);
+    })
+    .catch(error => {
+        console.error('Error fetching holidays:', error);
+    });
+// Adjust the URL as needed
+
 export default EventCalendar;
