@@ -7,7 +7,7 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL, 
+    password_hash VARCHAR(255) NOT NULL, 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -49,16 +49,15 @@ CREATE TABLE reminders (
 
 -- Optional table to store holidays and moon phases if you want to keep them separate
 CREATE TABLE holidays (
-    id SERIAL PRIMARY KEY,
-    holiday_name VARCHAR(255) NOT NULL,
-    holiday_description TEXT,
-    holiday_date DATE NOT NULL
+    holiday_id SERIAL PRIMARY KEY,
+    holiday_name VARCHAR(100) NOT NULL,
+    holiday_date DATE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE moon_phases (
-    id SERIAL PRIMARY KEY,
+    phase_id SERIAL PRIMARY KEY,
     phase_name VARCHAR(50) NOT NULL,
-    illumination DECIMAL,
-    moon_age DECIMAL,
-    phase_date DATE NOT NULL
+    phase_date DATE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

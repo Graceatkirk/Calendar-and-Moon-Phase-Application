@@ -1,25 +1,51 @@
-
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import LoginForm from './components/loginform'; // adjust path as needed
-import AppPage from './appPage'; // your app page component
+import { useState, useEffect } from 'react';
+import './App.css';
+import EventCalendar from './components/eventcalendar';
+import LoginForm from './components/loginform';
 
 function App() {
-  // Add an onLogin handler
-  const handleLogin = async (email, password) => {
-    // Add your login logic here
-    console.log('Logging in with:', email, password);
-    // You might want to add actual authentication logic here
-    return Promise.resolve(); // Simulate successful login
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if there's a token in localStorage
+    const token = localStorage.getItem('authToken');
+    setIsLoggedIn(!!token); // Set isLoggedIn based on whether the token exists
+  }, []);
+
+  const handleLogin = (token) => {
+    // Store token in localStorage and update isLoggedIn state
+    localStorage.setItem('authToken', token);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    // Clear token from localStorage and update isLoggedIn state
+    localStorage.removeItem('authToken');
+    setIsLoggedIn(false);
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<LoginForm onLogin={handleLogin} />} />
-      <Route path="/app" element={<AppPage />} />
-    </Routes>
+    <div className="app-container">
+      <header>
+        <h1>My Calendar App</h1>
+      </header>
+
+      <main>
+        {isLoggedIn ? (
+          <>
+            <EventCalendar /> {/* Calendar component */}
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <LoginForm onLogin={handleLogin} />
+        )}
+      </main>
+
+      <footer>
+        <p>© 2024 Calendar App</p>
+      </footer>
+    </div>
   );
 }
 
 export default App;
-
