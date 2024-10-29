@@ -14,12 +14,12 @@ VALUES
     ('Health');
 
 -- Seed Users
-INSERT INTO users (username, email, password_hash)
-VALUES 
-    ('user1', 'user1@example.com', 'password1'),
-    ('user2', 'user2@example.com', 'password2'),
-    ('user3', 'user3@example.com', 'password3');
-
+-- Seed Users
+INSERT INTO users (username, email, password_hash) VALUES
+    ('user1', 'user1@example.com', '$2b$10$POkUxY0FRYhWCLGwvWDlhOaE0Q8C28KdRWitRUtUDMDCRUMoIqd6i'),
+    ('user2', 'user2@example.com', '$2b$10$9eDXA2qmjQdfbj.cTFxGTevoyefks6HxopTF3.daplaEteYLrN5dW'),
+    ('user3', 'user3@example.com', '$2b$10$SL2YpgufDtABJkXZPw8bp./w5is0j/qPUx0BRPnptbwOeJeMbPCC.');
+    
 -- Seed Holidays (These should eventually be replaced with API data)
 INSERT INTO holidays (holiday_name, holiday_date) VALUES
     ('New Years Day', '2024-01-01'),
