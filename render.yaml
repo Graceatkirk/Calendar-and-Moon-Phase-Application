@@ -9,5 +9,3 @@ services:
       - key: DATABASE_URL
         value: postgres://user:password@host:port/dbname
     plan: starter
-    regions:
-      - oregon
