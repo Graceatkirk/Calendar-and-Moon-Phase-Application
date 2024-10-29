@@ -42,6 +42,12 @@ const fetchHolidays = async () => {
 
 // Function to insert holidays into the database
 const insertHolidays = async (holidays) => {
+    // Ensure that holidays is an array before iterating
+    if (!Array.isArray(holidays)) {
+        console.error("Expected holidays to be an array but got:", holidays);
+        return; // Exit early if not iterable
+    }
+    
     for (const holiday of holidays) {
         const { name, date } = holiday; // Adjust based on API response structure
         await pool.query('INSERT INTO holidays (holiday_name, holiday_date) VALUES ($1, $2)', [name, date]);
@@ -70,6 +76,11 @@ const fetchMoonPhases = async () => {
 
 // Function to insert moon phases into the database
 const insertMoonPhases = async (moonPhases) => {
+    if (!Array.isArray(moonPhases)) {
+        console.error("Expected moonPhases to be an array but got:", moonPhases);
+        return; // Exit early if not iterable
+    }
+    
     for (const phase of moonPhases) {
         const { name, date } = phase; // Adjust based on API response structure
         await pool.query('INSERT INTO moon_phases (phase_name, phase_date) VALUES ($1, $2)', [name, date]);
