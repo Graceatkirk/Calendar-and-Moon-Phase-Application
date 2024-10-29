@@ -1,4 +1,4 @@
-// src/components/EventCalendar.js
+// src/components/EventCalendar.jsx
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
@@ -24,6 +24,8 @@ const AddEventForm = ({ onEventAdded }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    // Include authorization token if needed
+                    'Authorization': `Bearer ${localStorage.getItem('yourToken')}`, // Get token from local storage
                 },
                 body: JSON.stringify(eventData),
             });
@@ -64,15 +66,15 @@ const EventCalendar = () => {
     const fetchEvents = async () => {
         try {
             // Fetch user events
-            const response = await fetch('/api/events', {
+            const response = await fetch('http://localhost:3000/events', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     // Include authorization token if needed
-                    'Authorization': `Bearer ${yourToken}`, // Replace `yourToken` with the actual token if needed
+                    'Authorization': `Bearer ${localStorage.getItem('yourToken')}`, // Get token from local storage
                 },
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to fetch events');
             }
@@ -93,7 +95,7 @@ const EventCalendar = () => {
                 start: new Date(event.start_time),
                 end: new Date(event.end_time),
             }));
-    
+
             setEvents(combinedEvents);
         } catch (error) {
             console.error(error);

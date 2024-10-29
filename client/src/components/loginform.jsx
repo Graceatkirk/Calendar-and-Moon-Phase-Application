@@ -16,7 +16,7 @@ const LoginForm = ({ onLogin }) => {
     
     if (action === "Login") {
       try {
-        const response = await fetch('http://localhost:3000/api/auth/login', { // Replace with your actual login endpoint
+        const response = await fetch('http://localhost:3000/api/auth/login', { // Your actual login endpoint
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,10 @@ const LoginForm = ({ onLogin }) => {
 
         const data = await response.json();
         console.log("Logged in successfully:", data);
-        
+
+        // Store the token in local storage
+        localStorage.setItem('yourToken', data.token); // Save token
+
         // Call the onLogin prop function to update App state
         onLogin(data.token); // Assuming the JWT is in data.token
         navigate('/app'); // Redirect to the app page after login
