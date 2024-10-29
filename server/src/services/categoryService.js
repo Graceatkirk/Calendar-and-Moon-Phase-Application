@@ -24,4 +24,4 @@ class CategoryService {
     }
 }
 
-export { CategoryService }; // Fix the export statement
+export const categoryService = new CategoryService();

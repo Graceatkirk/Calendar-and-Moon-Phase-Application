@@ -2,7 +2,6 @@ import { Sequelize } from 'sequelize';
 import { dbConfig } from '../config/database.js'; // Adjust the path as needed
 import { Event } from '../models/event.js'; // Adjust based on your actual model file paths
 import Category from '../models/category.js'; // Adjust as needed
-import { Reminder } from '../models/reminders.js'; // Adjust as needed
 import { Op } from 'sequelize';
 
 // Initialize Sequelize instance
