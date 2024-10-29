@@ -1,7 +1,7 @@
-// src/controllers/authControllers.js
+
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'; // Ensure bcrypt is imported
-import { User } from '../config/database.js'; // Import User from the database configuration
+import { User } from '../../config/database.js'; // Import User from the database configuration
 
 // Function to register a new user
 export const register = async (req, res) => {
@@ -49,3 +49,5 @@ export const login = async (req, res) => {
 
     res.json({ token });
 };
+
+export default new AuthRoutes();

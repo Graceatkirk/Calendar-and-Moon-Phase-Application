@@ -3,9 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import eventRoutes from './routes/eventRoutes.js';
-import authRoutes from './routes/authRoutes.js'; 
+import authRoutes from './routes/api/authRoutes.js'; 
 import pkg from 'pg';
 import jwt from 'jsonwebtoken'; // Import the jsonwebtoken library
+import envService from './services/envService.js';
 
 const { Pool } = pkg;
 import { Event } from './models/event.js'; // Adjust as necessary
