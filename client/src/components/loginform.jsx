@@ -13,15 +13,24 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle login or signup logic here
+    
+    // Simulate storing user data in local storage
     if (action === "Login") {
       console.log("Logging in with:", formState.email, formState.password);
+      localStorage.setItem('userEmail', formState.email);
+      localStorage.setItem('userPassword', formState.password); // Avoid storing plain passwords in a real app!
+      
       // Redirect after successful login
       navigate('/app'); // Change to your desired route
     } else {
       console.log("Signing up with:", formState.username, formState.email, formState.password);
-      // Redirect after successful signup
-      navigate('/app'); // Change to your desired route
+      localStorage.setItem('username', formState.username);
+      localStorage.setItem('userEmail', formState.email);
+      localStorage.setItem('userPassword', formState.password); // Avoid storing plain passwords in a real app!
+      
+      // Redirect back to login after successful signup
+      alert("Signup successful! You can now log in."); // Optional: show a success message
+      setAction("Login"); // Switch to Login action
     }
   };
 
