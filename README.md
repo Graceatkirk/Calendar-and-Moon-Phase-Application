@@ -18,13 +18,13 @@ Welcome to the calendar that can track holidays and moon phases. Click on a date
 Use this app to find out which holiday is coming up and what phase the moon will be at. Use to help schedule your busy life and remember important events. Our systenm will give you the major holidays and other holidays you might miss. It will aslo show you what the mooned looked like at that same time. Just click on a year, month, or day to find out which holiday and moon phase happened at that time!
 
 # Features
-Click through the years, months, or day.
+-  Click through the years, months, or day.
 
-Enter an event for the day you picked.
+-  Enter an event for the day you picked.
 
-Check what moon phase and holiday happpened on the day you picked.
+-  Check what moon phase and holiday happpened on the day you picked.
 
-Navigate back and forth between past, present, and future.
+-  Navigate back and forth between past, present, and future.
 
 # Installation
 
