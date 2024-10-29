@@ -5,7 +5,6 @@ class UserService {
   async createUser(userData) {
     try {
       return await User.create({
-        username: userData.username,
         email: userData.email,
         password_hash: userData.passwordHash
       });

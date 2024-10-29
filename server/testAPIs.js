@@ -1,4 +1,7 @@
+// testAPIs.js
+import axios from 'axios';
 import dotenv from 'dotenv';
+
 
 dotenv.config(); // Load environment variables
 
@@ -7,13 +10,10 @@ const testCalendarificAPI = async () => {
     const year = new Date().getFullYear();
     const url = `https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=US&year=${year}`;
     
+
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Calendarific API response:", data);
+        const response = await axios.get(url);
+        console.log("Calendarific API response:", response.data);
     } catch (error) {
         console.error("Error fetching from Calendarific API:", error.message);
     }
@@ -24,18 +24,13 @@ const testMoonPhaseAPI = async () => {
     const url = `https://moon-phase1.p.rapidapi.com/moonphases?date=2024-01-01`;
 
     try {
-        const response = await fetch(url, {
-            method: 'GET',
+        const response = await axios.get(url, {
             headers: {
                 "X-RapidAPI-Key": apiKey,
                 "X-RapidAPI-Host": "moon-phase1.p.rapidapi.com"
             }
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Moon Phase API response:", data);
+        console.log("Moon Phase API response:", response.data);
     } catch (error) {
         console.error("Error fetching from Moon Phase API:", error.message);
     }
