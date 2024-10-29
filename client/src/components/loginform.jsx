@@ -16,7 +16,7 @@ const LoginForm = ({ onLogin }) => {
     
     if (action === "Login") {
       try {
-        const response = await fetch('http://your-api-endpoint/login', { // Replace with your actual login endpoint
+        const response = await fetch('http://localhost:3000/api/auth/login', { // Replace with your actual login endpoint
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

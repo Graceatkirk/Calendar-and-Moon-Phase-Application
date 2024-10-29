@@ -144,6 +144,18 @@ app.post('/api/events', async (req, res) => {
     }
 });
   
+app.post('/api/auth/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    // Implement your authentication logic here
+    const user = await authenticateUser(email, password); // Function to authenticate user
+    if (!user) {
+        return res.status(401).json({ message: 'Invalid credentials' }); // Handle unauthorized access
+    }
+
+    const token = generateJWT(user); // Generate JWT token for the authenticated user
+    res.json({ token }); // Respond with the token
+});
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
