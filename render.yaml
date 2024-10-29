@@ -1,0 +1,13 @@
+version: 1
+services:
+  - type: web
+    name: my-node-app
+    env: node
+    buildCommand: npm run dev
+    startCommand: npm run dev
+    envVars:
+      - key: DATABASE_URL
+        value: postgres://user:password@host:port/dbname
+    plan: starter
+    regions:
+      - oregon
