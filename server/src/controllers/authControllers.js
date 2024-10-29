@@ -1,30 +1,42 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const { User } = require('../models');
+import jwt from 'jsonwebtoken';
+import User from '../models/user.js'; // Ensure the correct path to your User model
 
-exports.register = async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await User.create({
-      username: req.body.username,
-      password: hashedPassword
-    });
-    res.status(201).json({ message: 'User created successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error registering user', error });
-  }
-};
+// Function to register a new user
+export async function register(req, res) {
+    const { email, password } = req.body;
 
-exports.login = async (req, res) => {
-  try {
-    const user = await User.findOne({ where: { username: req.body.username } });
-    if (user && await bcrypt.compare(req.body.password, user.password)) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
-    } else {
-      res.status(400).json({ message: 'Invalid credentials' });
+    // Basic validation
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required.' });
     }
-  } catch (error) {
-    res.status(500).json({ message: 'Error logging in', error });
-  }
-};
+
+    // Check if the user already exists
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+        return res.status(400).json({ message: 'User already exists with this email.' });
+    }
+
+    // Create a new user
+    const newUser = await User.create({ email, password }); // You may want to hash the password before saving
+
+    // Generate JWT
+    const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(201).json({ token });
+}
+
+// Function to log in a user
+export async function login(req, res) {
+    const { email, password } = req.body;
+
+    // Validate user credentials
+    const user = await User.findOne({ where: { email } });
+    if (!user || !user.validPassword(password)) {
+        return res.status(400).json({ message: 'Invalid email or password.' });
+    }
+
+    // Generate JWT
+    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    res.json({ token });
+}
