@@ -2,12 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "npx tsc",
+    "build": "react-scripts build",
     "dev": "nodemon server.js",
     "seed": "npm run build && node dist/seeds/index.js"
   },
@@ -25,6 +24,7 @@
     "pg-hstore": "^2.3.4",
     "react-dotenv": "^0.1.3",
     "react-router-dom": "^6.27.0",
+    "react-scripts": "^5.0.1",
     "sequelize": "^6.37.4"
   },
   "devDependencies": {
