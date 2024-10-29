@@ -29,19 +29,46 @@
     transform: rotate(360deg);
   }
 }
+/* App.css */
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #719dcc7e; 
+  font-family: Arial, sans-serif;
 }
 
-.card {
-  padding: 2em;
+/* Header styling */
+header {
+  text-align: center;
+  padding: 1rem;
+  background-color: #253f5c7e; 
+  color: #fff;
+
 }
 
-.read-the-docs {
-  color: #888;
+header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Main content styling */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #253f5c7e; 
+  color: #fff;
 }
 
 .container {
@@ -142,3 +169,18 @@ color:#0004f3aa;
 .gray {
   background: #f7f7f7;
 }
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+button {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade for primary buttons */
+  color: #fff; /* White text on hover */
+}
+
