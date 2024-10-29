@@ -15,7 +15,7 @@
 This app is curated to each user allowing each person to login to their own personal calendar where you can find unique daily holidays and moon phases to enhance your user experience. You are able to save events into each day and have that save so the next time you login all your events are there waiting for you
 
 # Usage
-Use this app to find out which holiday is coming up and what phase the moon will be at. Use to help schedule your busy life and remember important events. Our systenm will give you the major holidays and other holidays you might miss. It will aslo show you what the mooned looked like at that same time. Just click on a year, month, or day to find out which holiday and moon phase happened at that time!
+Use this app to find out which holiday is coming up and what phase the moon will be at. Use to help schedule your busy life and remember important events. Our systenm will give you the major holidays and other holidays you might miss. It will aslo show you what the mooned looked like at that same time. Just click on a year, month, or day to find out which holiday and moon phase happened at that time! The perfect app to keep you up to date!
 
 # Features
 -  Click through the years, months, or day.
