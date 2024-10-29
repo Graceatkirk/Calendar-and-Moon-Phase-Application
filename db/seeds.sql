@@ -1,3 +1,9 @@
+TRUNCATE TABLE categories RESTART IDENTITY CASCADE;
+TRUNCATE TABLE users RESTART IDENTITY CASCADE;
+TRUNCATE TABLE holidays RESTART IDENTITY CASCADE;
+TRUNCATE TABLE moon_phases RESTART IDENTITY CASCADE;
+TRUNCATE TABLE events RESTART IDENTITY CASCADE;
+
 -- Seed Categories
 INSERT INTO categories (category_name)
 VALUES 
@@ -8,7 +14,7 @@ VALUES
     ('Health');
 
 -- Seed Users
-INSERT INTO users (username, email, password)
+INSERT INTO users (username, email, password_hash)
 VALUES 
     ('user1', 'user1@example.com', 'password1'),
     ('user2', 'user2@example.com', 'password2'),

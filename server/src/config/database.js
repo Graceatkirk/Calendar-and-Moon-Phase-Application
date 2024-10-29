@@ -1,5 +1,7 @@
+// src/config/database.js
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import defineUser from '../models/user.js'; // Import the User model
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -30,5 +32,8 @@ const sequelize = new Sequelize(dbConfig.development.database, dbConfig.developm
     logging: false // Disable logging; default: console.log
 });
 
-// Export both the configuration and the sequelize instance
-export { dbConfig, sequelize };
+// Initialize the User model
+const User = defineUser(sequelize); // Call the function to define User with the Sequelize instance
+
+// Export both the sequelize instance and the User model
+export { dbConfig, sequelize, User };

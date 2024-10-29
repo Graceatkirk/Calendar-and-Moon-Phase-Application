@@ -1,37 +1,46 @@
+// src/controllers/authControllers.js
 import jwt from 'jsonwebtoken';
-import User from '../models/user.js'; // Ensure the correct path to your User model
+import bcrypt from 'bcrypt'; // Ensure bcrypt is imported
+import { User } from '../config/database.js'; // Import User from the database configuration
 
 // Function to register a new user
-export async function register(req, res) {
-    const { email, password } = req.body;
+export const register = async (req, res) => {
+    const { username, email, password } = req.body; // Include email
 
-    // Basic validation
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Email and password are required.' });
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: 'Username, email, and password are required.' });
     }
 
-    // Check if the user already exists
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-        return res.status(400).json({ message: 'User already exists with this email.' });
+    try {
+        // Check if user already exists
+        const existingUser = await User.findOne({ where: { email } }); // Check by email
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists.' });
+        }
+
+        // Hash the password before saving it
+        const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
+        const newUser = await User.create({ username, email, password_hash: hashedPassword }); // Adjust based on your model field
+        return res.status(201).json(newUser);
+    } catch (error) {
+        console.error('Error creating user:', error);
+        return res.status(500).json({ message: 'Server error. Please try again later.' });
     }
-
-    // Create a new user
-    const newUser = await User.create({ email, password }); // You may want to hash the password before saving
-
-    // Generate JWT
-    const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    res.status(201).json({ token });
-}
+};
 
 // Function to log in a user
-export async function login(req, res) {
+export const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Validate user credentials
     const user = await User.findOne({ where: { email } });
-    if (!user || !user.validPassword(password)) {
+    if (!user) {
+        return res.status(400).json({ message: 'Invalid email or password.' });
+    }
+
+    // Check if the password is valid
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash); // Use password_hash field
+    if (!isPasswordValid) {
         return res.status(400).json({ message: 'Invalid email or password.' });
     }
 
@@ -39,4 +48,5 @@ export async function login(req, res) {
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.json({ token });
-}
+};
+
