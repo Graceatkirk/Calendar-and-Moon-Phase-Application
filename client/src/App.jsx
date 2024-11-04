@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import 'react-calendar/dist/Calendar.css';
 import './App.css';
 import EventCalendar from './components/eventcalendar';
 import LoginForm from './components/loginform';
@@ -27,7 +28,7 @@ function App() {
   return (
     <div className="app-container">
       <header>
-        <h1>My Calendar App</h1>
+        <h1></h1>
       </header>
 
       <main>
@@ -42,7 +43,7 @@ function App() {
       </main>
 
       <footer>
-        <p>© 2024 Calendar App</p>
+        <p></p>
       </footer>
     </div>
   );

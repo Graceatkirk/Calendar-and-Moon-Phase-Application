@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const AddEventForm = () => {
   const [title, setTitle] = useState('');
@@ -57,7 +58,7 @@ const AddEventForm = () => {
       <label>
         Title:
         <input
-          type="text"
+          className="event-title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required

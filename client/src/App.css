@@ -1,42 +1,182 @@
+/* Root container for the app */
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Main app container */
+.app-container {
+  background-color: #8e9dcd; /* Light background to contrast the calendar */
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header styling */
+.header {
+  font-size: 2rem;
+  color: #4f638d; /* Slightly darker shade of #7185c1 */
+  margin-bottom: 1rem;
+}
+
+/* Toolbar for navigating the calendar */
+.rbc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #7185c1;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.rbc-btn-group button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.rbc-btn-group button:hover {
+  background-color: #4f638d; /* Darker shade for hover effect */
+}
+
+.rbc-active {
+  background-color: #4f638d;
+  color: white;
+}
+
+/* Month header styling */
+.rbc-row .rbc-month-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-weight: bold;
+  color: #4f638d;
+}
+
+/* Header for each day */
+.rbc-header {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4f638d;
+  padding: 0.5rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Month row styling */
+.rbc-month-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #7185c1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Larger day cells */
+.rbc-day-bg {
+  flex: 1 0 14.28%; /* Equal width for each day cell */
+  height: 50px;
+  background-color: #e6ecfa;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: background-color 0.3s;
+  position: relative; /* Relative positioning for the date cell */
+  padding: 40px;
+}
+
+.rbc-day-bg:hover {
+  background-color: #cfd8f3; /* Light hover effect */
+}
+
+/* Smaller date cells, positioned at the top-right */
+.rbc-date-cell {
+  
+  top: 8px;
+  right: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #4f638d;
+}
+
+.rbc-now {
+  font-size: 0.8rem;
+  color: #4f638d;
+}
+
+.rbc-current {
+  font-size: 0.8rem;
+  color: #4f638d;
+}
+
+/* Button links */
+.rbc-button-link {
+  color: #4f638d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Row styling */
+.rbc-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: none;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+/* Background for off-range and today cells */
+.rcb-day-bg .rbc-off-range-bg {
+  background-color: #9ca9d3; /* Background for days not in the current month */
+}
+
+.rbc-today {
+  background-color: #cfd8f3;
+}
+
+.rbc-selected {
+  background-color: #4f638d;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .rbc-toolbar {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .rbc-btn-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .rbc-header {
+    font-size: 1rem;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .rbc-month-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: none;
+    gap: 0.5rem;
+  }
 
-.read-the-docs {
-  color: #888;
+  .rbc-day-bg {
+    height: 120px; /* Adjusted for smaller screens */
+    border-bottom: none;
+  }
+
+  .app-container {
+    padding: 0.5rem;
+  }
 }
